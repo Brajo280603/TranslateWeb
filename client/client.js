@@ -5,24 +5,29 @@ let translateTo = document.querySelector("#translateTo");
 
 async function translate (){
     
-    let url = "http://127.0.0.1:3000/translate";
-    
-    let res = await fetch(url,{
-        method:"POST",
-        headers: {
-            "Content-Type": "application/json",
-          },
-        body:JSON.stringify({
-            text : inputField.value,
-            translateTo : translateTo.value,
+    try{
+        let url = "http://127.0.0.1:3000/translate";
+        
+        let res = await fetch(url,{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify({
+                text : inputField.value,
+                translateTo : translateTo.value,
+            })
         })
-    })
 
-    res = await res.json();
+        res = await res.json();
 
-    console.log(res);
+        console.log(res);
 
-    outputField.innerText = res.text;
+        outputField.innerText = res.text;
+    }
+    catch (err){
+        alert("error! try again");
+    }
 
     
 }
